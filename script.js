@@ -2,7 +2,7 @@
  * Global Variables
 ******************************************************************************/
 const canvas = document.querySelector("#canvas");
-let numGridSquaresPerSide = 1;
+let startingSize = 32;
 /*****************************************************************************/
 
 /******************************************************************************
@@ -30,7 +30,7 @@ function increaseRgbaAlpha(cssRgbaString) {
     else {
         newAlpha = 1.0;
     }
-    
+
     // Recreate the CSS RGBA string with the new alpha value
     return String(cssRgbaString).replace(`${oldAlpha})`, `${newAlpha})`);
 }
@@ -59,7 +59,7 @@ function populateCanvas(size) {
         canvas.removeChild(canvas.lastChild);
     }
 
-    // Create a new grid on the canvas
+    // Create a new grid on the canvas, row by row
     for (let row = 0; row < size; row++) {
         const rowDiv = document.createElement("div");
         rowDiv.style.display = "flex";
@@ -87,6 +87,8 @@ resizeBtn.addEventListener("click", function() {
     }
     populateCanvas(newSize);
 })
-populateCanvas(numGridSquaresPerSide);
+
+// Populate the canvas with a new grid
+populateCanvas(startingSize);
 /*****************************************************************************/
 
