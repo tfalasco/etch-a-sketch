@@ -9,7 +9,7 @@ body {
 }
 
 .tile {
-    border: 1px, solid, black;
+    border: 1px, solid, lightgray;
     flex: 1 1 100%;
     margin-left: -1px;
     margin-top: -1px;
