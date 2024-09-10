@@ -76,10 +76,16 @@ function populateCanvas(size) {
 /******************************************************************************
  * Main Script
 ******************************************************************************/
-const gridSize = document.querySelector("#gridSize");
-gridSize.addEventListener("change", function() {
-    numGridSquaresPerSide = gridSize.value;
-    populateCanvas(numGridSquaresPerSide);
+// Set a callback for the resize button
+const resizeBtn = document.querySelector("#resizeBtn");
+resizeBtn.addEventListener("click", function() {
+    let newSize = 0;
+    // Prompt the user for a new grid size between 1 and 100
+    while ((newSize < 1) || (newSize > 100) || (NaN === newSize)) {
+        const userInput = prompt("Enter a new grid size (1 - 100)");
+        newSize = Number.parseInt(userInput);
+    }
+    populateCanvas(newSize);
 })
 populateCanvas(numGridSquaresPerSide);
 /*****************************************************************************/
