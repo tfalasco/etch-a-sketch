@@ -7,33 +7,40 @@ let startingSize = 32;
 /******************************************************************************
  * Functions
 ******************************************************************************/
-function getAlphaFromRgba(cssRgbaString) {
-    // The alpha value is the last item in the CSS RGBA string
-    let lastComma = String(cssRgbaString).lastIndexOf(",");
-    
-    // Extract the alpha part of the string
-    let alpha = String(cssRgbaString).slice(lastComma + 1);
-
-    // Parse the string as a float and return it
-    return Number.parseFloat(alpha);
-}
-
 function increaseRgbaAlpha(cssRgbaString) {
-    let oldAlpha = getAlphaFromRgba(cssRgbaString);
-    let newAlpha;
+    // Parse the RGBA string values into an array.
+    // Sometimes there will be four values if the alpha channel
+    // is less than 1.0.  Other times there can be only three values
+    // if the alpha channel is equal to 1.0.
+    const ALPHA_IDX = 3;
+    let openingParens = String(cssRgbaString).indexOf("(");
+    let closingParens = String(cssRgbaString).indexOf(")");
+    let valuesSubString = String(cssRgbaString).slice(openingParens + 1, closingParens);
+    let rgbaValues = valuesSubString.split(",");
 
-    // Increase alpha by 0.1 up to 0.99
-    // When setting alpha to fully 1.0, the color appears to change 
-    // to a different hue sometimes, depending on the RGB values.
-    if (oldAlpha < 0.9) {
-        newAlpha = oldAlpha + 0.1;
+    if (rgbaValues.length === 4) {
+        // Convert the alpha channel value to a float
+        let alpha = parseFloat(rgbaValues[ALPHA_IDX]);
+
+        // The alpha channel is included in the cssRgbaString.
+        // Increase the alpha channel value by 0.1, up to 1.0.
+        if (alpha < 0.9) {
+            alpha += 0.1;
+        }
+        else {
+            alpha = 1.0;
+        }
+
+        // Replace the alpha channel value with the newly calculated value
+        rgbaValues[ALPHA_IDX] = ` ${alpha}`;
     }
     else {
-        newAlpha = 0.99;
+        rgbaValues.push(" 1.0");
     }
 
-    // Recreate the CSS RGBA string with the new alpha value
-    return String(cssRgbaString).replace(`${oldAlpha})`, `${newAlpha})`);
+    // Recreate the cssRgbaString
+    // rgba(71, 18, 74, 0)
+    return `rgba(${rgbaValues[0]},${rgbaValues[1]},${rgbaValues[2]},${rgbaValues[3]})`;
 }
 
 function addTileTo(targetElement) {
