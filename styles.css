@@ -9,10 +9,11 @@ body {
 }
 
 .tile {
-    border: 1px, solid, lightgray;
+    border-color: lightgray;
+    border-width: 1px;
+    border-top-style: solid;
+    border-left-style: solid;
     flex: 1 1 100%;
-    margin-left: -1px;
-    margin-top: -1px;
 }
 
 #resizeBtn {
@@ -23,7 +24,7 @@ body {
 #canvas {
     width: 1024px;
     height: 1024px;
+    border: 1px, solid, black;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
 }
