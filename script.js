@@ -1,7 +1,6 @@
 /******************************************************************************
  * Global Variables
 ******************************************************************************/
-const canvas = document.querySelector("#canvas");
 let startingSize = 32;
 /*****************************************************************************/
 
@@ -55,6 +54,8 @@ function addTileTo(targetElement) {
 }
 
 function populateCanvas(size) {
+    const canvas = document.querySelector("#canvas");
+    
     // Clear the canvas
     while (canvas.firstChild) {
         canvas.removeChild(canvas.lastChild);
