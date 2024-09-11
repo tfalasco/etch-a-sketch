@@ -55,7 +55,7 @@ function addTileTo(targetElement) {
 
 function populateCanvas(size) {
     const canvas = document.querySelector("#canvas");
-    
+
     // Clear the canvas
     while (canvas.firstChild) {
         canvas.removeChild(canvas.lastChild);
@@ -83,7 +83,7 @@ const resizeBtn = document.querySelector("#resizeBtn");
 resizeBtn.addEventListener("click", function() {
     let newSize = 0;
     // Prompt the user for a new grid size between 1 and 100
-    while ((newSize < 1) || (newSize > 100) || (NaN === newSize)) {
+    while ((newSize < 1) || (newSize > 100) || (isNaN(newSize))) {
         const userInput = prompt("Enter a new grid size (1 - 100)");
         newSize = Number.parseInt(userInput);
     }
