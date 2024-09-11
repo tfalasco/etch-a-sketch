@@ -46,7 +46,8 @@ function addTileTo(targetElement) {
     newTile.classList.add("tile");
     newTile.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0)`;
     newTile.addEventListener("mouseenter", function () {
-        this.style.backgroundColor = increaseRgbaAlpha(this.style.backgroundColor);
+        this.style.backgroundColor = 
+        increaseRgbaAlpha(this.style.backgroundColor);
     });
 
     // Add the tile to the passed-in element
