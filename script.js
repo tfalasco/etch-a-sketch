@@ -22,12 +22,14 @@ function increaseRgbaAlpha(cssRgbaString) {
     let oldAlpha = getAlphaFromRgba(cssRgbaString);
     let newAlpha;
 
-    // Increase alpha by 0.1 up to 1.0
+    // Increase alpha by 0.1 up to 0.99
+    // When setting alpha to fully 1.0, the color appears to change 
+    // to a different hue sometimes, depending on the RGB values.
     if (oldAlpha < 0.9) {
         newAlpha = oldAlpha + 0.1;
     }
     else {
-        newAlpha = 1.0;
+        newAlpha = 0.99;
     }
 
     // Recreate the CSS RGBA string with the new alpha value
